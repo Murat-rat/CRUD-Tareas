@@ -117,6 +117,14 @@ public class TareasController implements Initializable {
         }
     }
 
+    @FXML
+    public void limpiarTabla(ActionEvent event) {
+        if(JOptionPane.showConfirmDialog(null, "¿Está seguro de que quiere borrar TODOS los datos de la Tabla?", "Borrar Datos", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
+            tablaTareas.getItems().clear();
+            idActual = 1;
+        }
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         id.setCellValueFactory(new PropertyValueFactory<Tarea,Integer>("id"));

@@ -30,7 +30,7 @@
          <children>
                 <Button fx:id="Btn_agregar" onAction="#agregarDatos" prefHeight="26.0" prefWidth="70.0" text="Agregar" />
                 <Button fx:id="Btn_eliminar" mnemonicParsing="false" onAction="#eliminarDatos" prefHeight="26.0" prefWidth="70.0" text="Eliminar" />
-                <Button fx:id="Btn_limpiar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
+                <Button fx:id="Btn_limpiar" mnemonicParsing="false" onAction="#limpiarTabla" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
          </children>
       </HBox>
         <TableView fx:id="tablaTareas" editable="true" maxWidth="570.0">

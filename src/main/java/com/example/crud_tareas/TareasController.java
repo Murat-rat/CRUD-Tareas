@@ -10,8 +10,10 @@ import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 
+import javax.swing.*;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class TareasController implements Initializable {
@@ -48,23 +50,45 @@ public class TareasController implements Initializable {
     @FXML
     private DatePicker eFecha;
 
+    @FXML
     public void agregarDatos(ActionEvent event) {
-        Tarea tarea = new Tarea(idActual,eTitulo.getText(),eDescripcion.getText(),ePrioridad.getSelectionModel().getSelectedItem().toString(),eFecha.getValue());
-        tablaTareas.getItems().add(tarea);
-        idActual++;
+        if(eTitulo.getText().isEmpty() || eDescripcion.getText().isEmpty() || ePrioridad.getValue() == null || eFecha.getValue() == null) {
+            JOptionPane.showMessageDialog(null, "Hay datos vacíos. Por favor llene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Tarea tarea = new Tarea(idActual,eTitulo.getText(),eDescripcion.getText(),ePrioridad.getSelectionModel().getSelectedItem().toString(),eFecha.getValue());
+            tablaTareas.getItems().add(tarea);
+            eTitulo.clear();
+            eDescripcion.clear();
+            ePrioridad.getSelectionModel().clearSelection();
+            eFecha.setValue(null);
+            idActual++;
+        }
     }
 
+    @FXML
     public void modificarDatos() {
         titulo.setCellFactory(TextFieldTableCell.<Tarea>forTableColumn());
         titulo.setOnEditCommit(event -> {
-            Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
-            tarea.setTitulo(event.getNewValue());
+            String nuevoTitulo = event.getNewValue();
+            if (nuevoTitulo.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(null, "Hay datos vacíos. Por favor llene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                event.getTableView().refresh();
+            } else {
+                Tarea tarea = event.getTableView().getItems().get(event.getTablePosition().getRow());
+                tarea.setTitulo(nuevoTitulo);
+            }
         });
 
         descripcion.setCellFactory(TextFieldTableCell.<Tarea>forTableColumn());
         descripcion.setOnEditCommit(event -> {
-            Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
-            tarea.setDescripcion(event.getNewValue());
+            String nuevaDescripcion = event.getNewValue();
+            if (nuevaDescripcion.compareTo("") == 0) {
+                JOptionPane.showMessageDialog(null, "Hay datos vacíos. Por favor llene todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+                event.getTableView().refresh();
+            } else {
+                Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
+                tarea.setPrioridad(nuevaDescripcion);
+            }
         });
 
         prioridad.setCellFactory(ComboBoxTableCell.forTableColumn(listaPrioridad));
@@ -72,6 +96,25 @@ public class TareasController implements Initializable {
             Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
             tarea.setPrioridad(event.getNewValue());
         });
+    }
+
+    @FXML
+    public void eliminarDatos(ActionEvent event) {
+        TableView.TableViewSelectionModel <Tarea> selectionModel = tablaTareas.getSelectionModel();
+        if (selectionModel.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "No se ha seleccionado ninguna tarea.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        ObservableList<Integer> list = selectionModel.getSelectedIndices();
+        Integer[] indicesSeleccionados = new Integer[list.size()];
+        indicesSeleccionados = list.toArray(indicesSeleccionados);
+
+        Arrays.sort(indicesSeleccionados);
+
+        for(int i = indicesSeleccionados.length - 1; i >= 0; i--) {
+            selectionModel.clearSelection(indicesSeleccionados[i].intValue());
+            tablaTareas.getItems().remove(indicesSeleccionados[i].intValue());
+        }
     }
 
     @Override

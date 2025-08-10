@@ -5,6 +5,7 @@ module com.example.crud_tareas {
     requires org.controlsfx.controls;
     requires com.dlsc.formsfx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.desktop;
 
     opens com.example.crud_tareas to javafx.fxml;
     exports com.example.crud_tareas;

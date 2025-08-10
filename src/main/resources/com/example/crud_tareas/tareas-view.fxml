@@ -4,7 +4,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox prefHeight="550.0" prefWidth="570.0" spacing="5.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.crud_tareas.TareasController">
+<VBox alignment="CENTER" prefHeight="550.0" prefWidth="570.0" spacing="5.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.crud_tareas.TareasController">
    <children>
         <VBox alignment="CENTER" prefWidth="100.0" spacing="5.0" />
       <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
@@ -29,11 +29,11 @@
       <HBox alignment="CENTER" prefHeight="33.0" prefWidth="377.0" spacing="7.0">
          <children>
                 <Button fx:id="Btn_agregar" onAction="#agregarDatos" prefHeight="26.0" prefWidth="70.0" text="Agregar" />
-                <Button fx:id="Btn_eliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Eliminar" />
+                <Button fx:id="Btn_eliminar" mnemonicParsing="false" onAction="#eliminarDatos" prefHeight="26.0" prefWidth="70.0" text="Eliminar" />
                 <Button fx:id="Btn_limpiar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
          </children>
       </HBox>
-        <TableView fx:id="tablaTareas" editable="true">
+        <TableView fx:id="tablaTareas" editable="true" maxWidth="570.0">
             <columns>
                 <TableColumn fx:id="id" prefWidth="43.0" sortable="false" text="ID" />
                 <TableColumn fx:id="titulo" prefWidth="106.0" sortable="false" text="Título" />

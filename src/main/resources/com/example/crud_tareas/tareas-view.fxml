@@ -4,30 +4,42 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<HBox alignment="CENTER" prefHeight="300.0" prefWidth="520.0" spacing="5.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.crud_tareas.TareasController">
+<VBox xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.crud_tareas.TareasController">
    <children>
-      <TableView fx:id="tablaTareas">
-        <columns>
-          <TableColumn prefWidth="75.0" text="ID" />
-          <TableColumn prefWidth="75.0" text="Título" />
-            <TableColumn prefWidth="75.0" text="Descripción" />
-            <TableColumn prefWidth="75.0" text="Prioridad" />
-            <TableColumn prefWidth="75.0" text="Fecha Límite" />
-        </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
-      </TableView>
-      <VBox alignment="CENTER" prefWidth="100.0" spacing="5.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
          <children>
-             <Button fx:id="Btn_agregar" prefHeight="26.0" prefWidth="70.0" text="Agregar" />
-            <Button fx:id="Btn_editar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Editar" />
-            <Button fx:id="Btn_eliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Eliminar" />
-            <Button fx:id="Btn_limpiar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
+            <TextField fx:id="eTitulo" promptText="Título" />
+            <TextArea fx:id="eDescripcion" prefHeight="200.0" prefWidth="200.0" promptText="Descripción..." />
+            <ComboBox fx:id="ePrioridad" prefWidth="150.0" promptText="Prioridad" visibleRowCount="3" />
+            <DatePicker fx:id="eFecha" promptText="Fecha" />
          </children>
-      </VBox>
+      </HBox>
+      <HBox alignment="CENTER" prefHeight="300.0" prefWidth="520.0" spacing="5.0">
+          <children>
+              <TableView fx:id="tablaTareas">
+                  <columns>
+                      <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="titulo" prefWidth="75.0" text="Título" />
+                      <TableColumn fx:id="descripcion" prefWidth="75.0" text="Descripción" />
+                      <TableColumn fx:id="prioridad" prefWidth="75.0" text="Prioridad" />
+                      <TableColumn fx:id="fechaLimite" prefWidth="75.0" text="Fecha Límite" />
+                  </columns>
+                  <columnResizePolicy>
+                      <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                  </columnResizePolicy>
+              </TableView>
+              <VBox alignment="CENTER" prefWidth="100.0" spacing="5.0">
+                  <children>
+                      <Button fx:id="Btn_agregar" onAction="#agregarDatos" prefHeight="26.0" prefWidth="70.0" text="Agregar" />
+                      <Button fx:id="Btn_editar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Editar" />
+                      <Button fx:id="Btn_eliminar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Eliminar" />
+                      <Button fx:id="Btn_limpiar" mnemonicParsing="false" prefHeight="26.0" prefWidth="70.0" text="Limpiar" />
+                  </children>
+              </VBox>
+          </children>
+          <padding>
+              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+          </padding>
+      </HBox>
    </children>
-   <padding>
-      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-   </padding>
-</HBox>
+</VBox>

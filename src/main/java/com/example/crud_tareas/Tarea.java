@@ -29,6 +29,26 @@ public class Tarea {
         return fechaLimite;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setPrioridad(String prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    public void setFechaLimite(LocalDate fechaLimite) {
+        this.fechaLimite = fechaLimite;
+    }
+
     public Tarea(int id, String titulo, String descripcion, String prioridad, LocalDate fechaLimite) {
         this.id = id;
         this.titulo = titulo;

@@ -6,13 +6,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.ComboBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class TareasController implements Initializable {
     Integer idActual = 1;
+    ObservableList<String> listaPrioridad = FXCollections.observableArrayList("Alta", "Media", "Baja");
+
     @FXML
     private TableColumn <Tarea, Integer> id;
 
@@ -49,6 +54,26 @@ public class TareasController implements Initializable {
         idActual++;
     }
 
+    public void modificarDatos() {
+        titulo.setCellFactory(TextFieldTableCell.<Tarea>forTableColumn());
+        titulo.setOnEditCommit(event -> {
+            Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
+            tarea.setTitulo(event.getNewValue());
+        });
+
+        descripcion.setCellFactory(TextFieldTableCell.<Tarea>forTableColumn());
+        descripcion.setOnEditCommit(event -> {
+            Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
+            tarea.setDescripcion(event.getNewValue());
+        });
+
+        prioridad.setCellFactory(ComboBoxTableCell.forTableColumn(listaPrioridad));
+        prioridad.setOnEditCommit(event -> {
+            Tarea tarea = (Tarea) event.getTableView().getItems().get(event.getTablePosition().getRow());
+            tarea.setPrioridad(event.getNewValue());
+        });
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         id.setCellValueFactory(new PropertyValueFactory<Tarea,Integer>("id"));
@@ -57,7 +82,8 @@ public class TareasController implements Initializable {
         prioridad.setCellValueFactory(new PropertyValueFactory<Tarea,String>("prioridad"));
         fechaLimite.setCellValueFactory(new PropertyValueFactory<Tarea,String>("fechaLimite"));
 
-        ObservableList<String> listaPrioridad = FXCollections.observableArrayList("Alta", "Media", "Baja");
         ePrioridad.setItems(listaPrioridad);
+
+        modificarDatos();
     }
 }
